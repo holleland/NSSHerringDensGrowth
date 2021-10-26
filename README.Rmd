@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 [Paper reference goes here](http://www.imr.no)
 
-In this project, we investigate how population density influences individual growth of Norwegian spring spawning herring. A parametrization of von Bertalanffy growth function (VBGF) is used to model the growth in terms of length of the fish. 
+In this paper, we investigate how population density influences individual growth of Norwegian spring spawning herring. A parametrization of von Bertalanffy growth function (VBGF) is used to model the growth in terms of length of the fish. 
 
 Since not all the data is available, rerunning everything is problematic. **(Note to self:  Perhaps I can make a branch which do not require the temperature data.)**
 

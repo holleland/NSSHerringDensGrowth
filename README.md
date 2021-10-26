@@ -18,7 +18,7 @@ Responsible for the code. Correspondance related to this to:
 
 [Paper reference goes here](http://www.imr.no)
 
-In this project, we investigate how population density influences
+In this paper, we investigate how population density influences
 individual growth of Norwegian spring spawning herring. A
 parametrization of von Bertalanffy growth function (VBGF) is used to
 model the growth in terms of length of the fish.
