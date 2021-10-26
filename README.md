@@ -54,6 +54,7 @@ R.version
 ## Authors’ github accounts
 
 **Sondre Hølleland** - [holleland](https://github.com/holleland)
+
 **Sindre Vatnehol** -
 [sindrevatnehol](https://github.com/sindrevatnehol)
 
