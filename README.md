@@ -18,16 +18,17 @@ Responsible for the code. Correspondance related to this to:
 
 [Paper link goes here](https://academic.oup.com/icesjms)
 
-In Stenevik et.al (2020a), we investigate how population density
-influences individual growth of Norwegian spring spawning herring. A
-parametrization of von Bertalanffy growth function (VBGF) is used to
-model the growth in terms of length of the fish.
+This github repository contains all the code used in Stenevik et.
+al.(2022a). Due to regulations, not all the data is publicly available
+and some of the results are therefore not possible to reproduce, but we
+have tried to enable the user to reproduce the main results. The
+individual herring data (Stenevik et. al. 2022b) is published and can be
+downloaded either manually from the website (see reference list) or by
+code provided below. The XSAM time series is available in the
+supplementary material to the article, while the temperature data is not
+public.
 
-Since not all the data is available, rerunning everything is not
-possible, but the main model and results can be reproduced by the user.
-See details on how to get access to the necessary data below.
-
-## Abstract
+## Paper abstract
 
 Density dependent growth, which might influence the effects of fisheries
 on a population are often ignored when management strategies are
