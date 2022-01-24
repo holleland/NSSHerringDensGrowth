@@ -16,7 +16,7 @@ Center, Norway.<br> <sup>\*</sup> Corresponding author;
 Responsible for the code. Correspondance related to this to:
 [sondre.hoelleland@hi.no](emailto:sondre.hoelleland@hi.no)
 
-[Paper reference goes here](https://academic.oup.com/icesjms)
+[Paper link goes here](https://academic.oup.com/icesjms)
 
 In Stenevik et.al (2020a), we investigate how population density
 influences individual growth of Norwegian spring spawning herring. A
@@ -45,13 +45,10 @@ of catch advice.
 
 ## Data
 
-The main data is available at [Stenevik et al
-(2022b)](https://doi.org/10.21335/NMDC-496562593). We do not have
-permission to publish the temperature data, and these are therefore not
-publicly available.
-
-In our *R/1\_data.R* script, the individual herring data is downloaded
-by running the following code:
+The main data has been put together by Stenevik et al (2022b) and is
+available at <https://doi.org/10.21335/NMDC-496562593>. In our
+*R/1\_data.R* script, the individual herring data is downloaded by
+running the following code:
 
 ``` r
 if(!("HerringData.csv" %in% list.files(path = "inputdata/") )) {
@@ -63,7 +60,9 @@ if(!("HerringData.csv" %in% list.files(path = "inputdata/") )) {
 We are not at liberty to publish the XSAM series here on github, but the
 user can download it from the paper supplementary material (Table S3).
 If you save it as *inputdata/N.txt*, the *R/1\_data.R* script will run
-as intended without adjustments to the code.
+as intended without adjustments to the code. We do not have permission
+to publish the temperature data, and these are therefore not publicly
+available.
 
 ## Authors’ github accounts
 
@@ -75,10 +74,6 @@ as intended without adjustments to the code.
 ## R version
 
 The code has been run on the following R version.
-
-``` r
-R.version
-```
 
     ##                _                           
     ## platform       x86_64-w64-mingw32          
