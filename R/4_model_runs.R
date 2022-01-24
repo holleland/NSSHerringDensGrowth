@@ -160,7 +160,7 @@ prediction_plot <- function(model, two, ind = 1, model1=NULL){
       geom_line()+
       scale_x_continuous(name = "Age", breaks = seq(0,26,2),
                          expand =c(0,0), minor_breaks = seq(0,26,1))+
-      scale_y_continuous(name = "Predicted length", breaks = seq(0,50,5), 
+      scale_y_continuous(name = "Predicted length (cm)", breaks = seq(0,50,5), 
                          minor_breaks = seq(0,50,5/2),
                          limits = c(0,45))+
       guides(color = guide_colorbar(barheight = 1, barwidth = 30)) + 
@@ -205,7 +205,7 @@ prediction_plot <- function(model, two, ind = 1, model1=NULL){
     pred2 <- ggplot(pred.df, aes(x = age, y = prediction, col = N2, group = N2))+ geom_line()+
       #scale_color_viridis_c(name = "Temperature (°C)", breaks = seq(3,5.5,.5))+
       scale_x_continuous(name = "Age", breaks = seq(0,26,2),expand =c(0,0), minor_breaks = seq(0,26,1))+
-      scale_y_continuous(name = "Predicted length", breaks = seq(0,50,5), minor_breaks = seq(0,50,5/2),
+      scale_y_continuous(name = "Predicted length (cm)", breaks = seq(0,50,5), minor_breaks = seq(0,50,5/2),
                          limits = c(0,45))+
       guides(color = guide_colorbar(barheight = 1, barwidth = 30)) + 
       geom_hline(aes(yintercept = Linf), lty =2, col = "darkblue")+
@@ -300,7 +300,7 @@ prediction_plot <- function(model, two, ind = 1, model1=NULL){
     geom_line()+
     scale_color_viridis_c(name = scalename)+#, breaks = seq(1,11,1))+
     scale_x_continuous(name = "Age", breaks = seq(0,26,2),expand =c(0,0), minor_breaks = seq(0,26,1))+
-    scale_y_continuous(name = "Predicted length", breaks = seq(0,70,2.5), minor_breaks = seq(0,70,2.5/2),
+    scale_y_continuous(name = "Predicted length (cm)", breaks = seq(0,70,2.5), minor_breaks = seq(0,70,2.5/2),
                        limits = c(0,45))+
     guides(color = guide_colorbar(barheight = 20, barwidth = 1)) +
     theme(legend.position = "right",
@@ -325,7 +325,7 @@ prediction_plot <- function(model, two, ind = 1, model1=NULL){
       geom_line()+
       #scale_color_viridis_c(name = "Logarithmic cohort size", breaks = seq(1,11,1))+
       scale_x_continuous(name = "Age", breaks = seq(0,26,2),expand =c(0,0), minor_breaks = seq(0,26,1))+
-      scale_y_continuous(name = "Predicted length", breaks = seq(0,70,2.5), minor_breaks = seq(0,70,2.5/2),
+      scale_y_continuous(name = "Predicted length (cm)", breaks = seq(0,70,2.5), minor_breaks = seq(0,70,2.5/2),
                          limits = c(0,45))+
       guides(color = guide_colorbar(barheight = 1, barwidth = 30)) +
       theme(legend.position = "top",
@@ -371,14 +371,14 @@ QQplots <- function(model, ind, save = FALSE){
   p2 <- ggplot(model$df, aes_string(x = "length", y = "stdres"))+
     geom_hline(yintercept = 0, col = "black")+
     geom_point(size = .4, col = "skyblue") + 
-    scale_x_continuous(name = "Length", breaks = seq(-5,50,5))+
+    scale_x_continuous(name = "Length (cm)", breaks = seq(-5,50,5))+
     scale_y_continuous(name = "Standardized residuals", breaks = seq(-20,20,1))+
     geom_smooth(method = "gam")
   p3 <- ggplot(model$df, aes_string(x = "length", y = "length-res.norm"))+
     geom_abline(intercept = 0,slope = 1, col = "black")+
     geom_point(size = .4, col = "skyblue") + 
-    scale_x_continuous(name = "Length", breaks = seq(-5,50,5))+
-    scale_y_continuous(name = "Fitted values", breaks = seq(-5,50,5))+
+    scale_x_continuous(name = "Length (cm)", breaks = seq(-5,50,5))+
+    scale_y_continuous(name = "Predicted length (cm)", breaks = seq(-5,50,5))+
     geom_smooth(method = "gam")
   #g1 <- ggpubr::ggarrange(p1,p2,p3, ncol = 3)
   
@@ -487,7 +487,7 @@ cat("Did all converge?", ifelse(all(unlist(
   lapply(model.list, function(x) x$opt$convergence))==0), 
   "\n- yes", "\n- no"))
 save(model.list, file = "data/model_runs.RData")
-
+load("data/model_runs.RData")
 # Checking AIC
 t(t(unlist(lapply(model.list, function(x){y <- x$AIC; names(y) <- x$scenario;y}))))
 

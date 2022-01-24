@@ -29,7 +29,7 @@ p1<-ggplot(N.df, aes(x = log(Nsum)))+
   geom_line(aes(y = a + b*(log(Nsum)-log(med))), lwd = .9, col = "blue")+
   geom_segment(y = a,yend=a,x=-Inf, xend = log(med), col = "blue", lty = 2) + 
   geom_segment(x = log(med),xend=log(med), y = -Inf, yend = a, lty = 2, col = "blue") +
-  scale_y_continuous(name = "Asymptotic length", #expression(l[infinity]), 
+  scale_y_continuous(name = "Asymptotic length (cm)", #expression(l[infinity]), 
                      breaks = c(seq(34,50.5,.5)),
                      labels = c(sprintf("%.1f",seq(34,50.5,.5))),
                      minor_breaks = seq(34.5,50.5,.25))+
@@ -47,6 +47,7 @@ p1<-ggplot(N.df, aes(x = log(Nsum)))+
 #ggarrange(p1,p2, ncol = 1)
 ggsave(p2, filename = "plots/6_Linf_vs_logN_Nsum.tiff",
        width=28, height=20, units="cm", device = "tiff", dpi = "retina")
+
 
 # -----------------------------------------------------------
 # --------------------- Predictions -------------------------
@@ -73,7 +74,7 @@ dfmeans <- df %>% group_by(Nsum, julianage) %>%
 predmean <- ggplot(pred.df, aes(x = age, y = prediction, col = logN, group = logN))+ geom_line()+
   scale_color_viridis_c(name = "Logarithmic density", breaks = seq(1,11,1))+
   scale_x_continuous(name = "Age", breaks = seq(0,26,2),expand =c(0,0), minor_breaks = seq(0,26,1))+
-  scale_y_continuous(name = "Predicted length", breaks = seq(0,50,2.5), minor_breaks = seq(0,50,2.5/2))+
+  scale_y_continuous(name = "Predicted length (cm)", breaks = seq(0,50,2.5), minor_breaks = seq(0,50,2.5/2))+
   guides(color = guide_colorbar(barheight = 1, barwidth = 30)) + 
   theme(legend.position = "top",
         legend.title = element_text(vjust = .9, size = 12), 
@@ -86,7 +87,7 @@ dfmeans <- df %>% group_by(Nsum, julianage) %>%
 predmedian <- ggplot(pred.df, aes(x = age, y = prediction, col = logN, group = logN))+ geom_line()+
   scale_color_viridis_c(name = "Logarithmic density", breaks = seq(1,11,1))+
   scale_x_continuous(name = "Age", breaks = seq(0,26,2),expand =c(0,0), minor_breaks = seq(0,26,1))+
-  scale_y_continuous(name = "Predicted length", breaks = seq(0,50,2.5), minor_breaks = seq(0,50,2.5/2))+
+  scale_y_continuous(name = "Predicted length (cm)", breaks = seq(0,50,2.5), minor_breaks = seq(0,50,2.5/2))+
   guides(color = guide_colorbar(barheight = 1, barwidth = 30)) + 
   theme(legend.position = "top",
         legend.title = element_text(vjust = .9, size = 12), 
@@ -145,17 +146,17 @@ df <- transform(df, agefac = factor(agefac, levels = paste0("Age ",1:21)))
 temp1 <- ggplot(df, aes(x = temp, y = res.norm/sigma.norm)) + geom_point(cex = .3)+
   facet_wrap(~agefac, ncol = 3, strip.position = "right") + 
   scale_x_continuous(name = "") +
-  scale_y_continuous(name = "", breaks = seq(-6,6,2), minor_breaks = seq(-6,6,1)) +
+  scale_y_continuous(name = "", breaks = seq(-12,12,2), minor_breaks = seq(-12,12,1)) +
   theme(strip.background = element_rect(fill = "white"))
 temp2 <- ggplot(df, aes(x = temp, y = res.norm/sigma.norm)) + geom_point(cex = .5)+
   scale_x_continuous(name = "") +
-  scale_y_continuous(name = "", breaks = seq(-6,6,2), minor_breaks = seq(-6,6,1))
+  scale_y_continuous(name = "", breaks = seq(-12,12,2), minor_breaks = seq(-12,12,1))
 ggtemp <- ggarrange(temp2,temp1, ncol = 2)
 ggtemp <- annotate_figure(ggtemp,
                           #top = text_grob("Visualizing len", color = "red", face = "bold", size = 14),
-                          bottom = text_grob("Mean summer temperature (0-min(age,3))", color = "black",
+                          bottom = text_grob("Mean summer temperature (°C)", color = "black",
                                              vjust = -.7),
-                          left = text_grob("Gaussian model residuals", color = "black", rot = 90,
+                          left = text_grob("Residuals", color = "black", rot = 90,
                                            vjust = 2, hjust = 0.5)
                           #right = "I'm done, thanks :-)!",
                           #fig.lab = "Figure 1", 

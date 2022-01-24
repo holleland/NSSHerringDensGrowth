@@ -46,3 +46,12 @@ colnames(esttab) <- paste0("Scenario ", 1:length(model.list))
 write.table(as.data.frame(esttab), file = "tables/tableS1.csv", dec= ".", sep = ";")
 
 
+# .. N at age and year ..
+N.df <- read.table("inputdata/N.txt",
+                   header = TRUE)
+names(N.df) <- str_remove(names(N.df), "X")
+t(N.df)
+N.df <- as.data.frame(t(N.df))
+names(N.df) <- paste0("Age ", names(N.df))
+N.df <- N.df %>% rownames_to_column("Year")
+write_excel_csv(N.df, file = "tables/XSAM_Series.csv")

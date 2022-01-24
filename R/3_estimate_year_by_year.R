@@ -20,9 +20,9 @@ par.list <- list(
 )
 library(tidyverse)
 df <- left_join(df, 
-                df %>% group_by(julianage, year) %>% count(name = "likelihoodweights"))
+                df %>% group_by(julianage, yearclass) %>% count(name = "likelihoodweights"))
 df <- left_join(df, 
-                df %>% group_by(year) %>% count(name = "totweights"))
+                df %>% group_by(yearclass) %>% count(name = "totweights"))
 
 data.list <- list(
   y = df$length, 
@@ -80,18 +80,18 @@ tab$logN <- log(tab$N)
 tab$logNsum <- log(tab$Nsum)
 
 # -- Linf as function of time ---
-tab.plot <- pivot_longer(tab %>% rename('Asymptotic~length'= Linf, 'log~N[(3)]' = logN), 
-             cols = c("Asymptotic~length", "log~N[(3)]"))
+tab.plot <- pivot_longer(tab %>% rename('Asymptotic~length~(cm)'= Linf, 'log~N[(3)]' = logN), 
+             cols = c("Asymptotic~length~(cm)", "log~N[(3)]"))
 tab.plot$lab <- ifelse(tab.plot$name == "log~N[(3)]", "A", "B")
 tab.plot$name <- as.factor(tab.plot$name)
 tab.plot <- transform(tab.plot, name = factor(name, 
-                                              levels = c("log~N[(3)]","Asymptotic~length")))
+                                              levels = c("log~N[(3)]","Asymptotic~length~(cm)")))
 (p1 <- ggplot(tab.plot, aes(x = yearclass, y = value)) + geom_line() +
   theme_bw() + 
   facet_wrap(~name, ncol = 1, scales = "free_y", 
              strip.position = "left", labeller = label_parsed) +
   geom_text(x = Inf, y = Inf, aes(label = lab), size = 9, hjust = 1.2, vjust = 1.2)+
-  scale_x_continuous(name = "Yearclass", breaks = seq(1900,2050,5))+
+  scale_x_continuous(name = "Year class", breaks = seq(1900,2050,5))+
   theme(strip.placement = "outside",
         strip.background = element_rect(fill = "white", color = "white"),
         strip.text = element_text(size = 12),
@@ -114,14 +114,38 @@ tab2 <- transform(tab2, model = factor(model,  levels = c("log~N[(3)]","log(N[(3
     geom_smooth(method = "lm") + 
     geom_hline(yintercept = fixed.pars[1,1], lty = 2, col = "blue", lwd = .9) +
     scale_x_continuous(name = "", breaks = seq(1,12,1)) + 
-    scale_y_continuous(name = "Asymptotic length", #expression(L[infinity]),
+    scale_y_continuous(name = "Asymptotic length (cm)", #expression(L[infinity]),
                        breaks = seq(30,90,1)) +
     scale_colour_viridis_c(name = "Year class")+
-    scale_size(name = "Number of \nsamples \n(in thousands)")+
     theme(strip.placement = "outside",
           strip.background = element_rect(fill = "white", color = "white"),
           text = element_text(size = 18))+
-    guides(color = guide_colorbar(barheight = 45))
+    guides(color = guide_colorbar(barheight = 45))+
+    scale_size(name = "Number of \nindividuals \n(in thousands)")
 )
 ggsave(p2, filename = "plots/4_empirical_Linf_by_logN_and_logNsum.tiff",
        width=28, height=40, units="cm", device = "tiff", dpi = "retina")
+
+# Adding a single version (for presentation purposes)
+(p2 <- ggplot(filter(tab2, model == "log(N[(3)]+N[(4)])"), aes(x = logN, y = Linf)) + 
+    facet_wrap(~model, ncol = 1, strip.position = "bottom",
+               labeller = label_parsed)+
+    geom_point(aes(size = n/1000, col = yearclass))+theme_bw() + 
+    geom_smooth(method = "lm") + 
+    geom_hline(yintercept = fixed.pars[1,1], lty = 2, col = "blue", lwd = .9) +
+    scale_x_continuous(name = "", breaks = seq(1,12,1)) + 
+    scale_y_continuous(name = "Asymptotic length (cm)", #expression(L[infinity]),
+                       breaks = seq(30,90,1)) +
+    scale_colour_viridis_c(name = "Year class")+
+    theme(strip.placement = "outside",
+          strip.background = element_rect(fill = "transparent", color = "transparent"),
+          text = element_text(size = 18),
+          plot.background = element_rect(fill = "transparent", color = NA),
+          panel.background = element_rect(fill = "transparent", color = NA),
+          rect = element_rect(fill = "transparent"))+
+    guides(color = guide_colorbar(barheight = 25))+
+    scale_size(name = "Number of \nindividuals \n(in thousands)")
+)
+ggsave(p2, filename = "plots/4_empirical_Linf_by_logNsum.png",
+       width=36, height=22, units="cm", device = "png", dpi = "retina",
+       bg = "transparent")

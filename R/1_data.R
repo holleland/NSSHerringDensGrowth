@@ -1,13 +1,32 @@
-# Initial analysis 
-# Author: Sondre Hølleland
-#
+# Script for structuring the data. 
 # --------------------------------------------------
 # -------------- LOADING PACKAGES ------------------
 # --------------------------------------------------
+# 
+# The script will check if inputdata/kola.RData is available and if not
+# it will put NAs for the df$temp column. 
+# The script will assume that 
+#     inputdata/N.txt - the XSAM series of number at age 
+# is available. We are currently not at liberty to publish this series,
+# but refer the user to Supplementary Table S3 in the paper. You can 
+# download the table from there and save it as inputdata/N.txt.
+# The herring individual data is downloaded automatically from NMDC
+# if the file inputdata/HerringData.csv is not available. 
+
 library(tidyverse)
 library(sf)
 
-
+# Download data file from 
+# --------------
+# Erling Kåre Stenevik (HI), Sondre Hølleland (HI), Katja Enberg (UiB), 
+# Åge Høines (HI), Are Salthaug (HI), Aril Slotte (HI), Sindre Vathehol (HI), 
+# Sondre Aanes (NR) (2022) Individual samples of Norwegian Spring Spawning 
+# herring 1935-2019 https://doi.org/10.21335/NMDC-496562593
+# ------------
+if(!("HerringData.csv" %in% list.files(path = "inputdata/") )) {
+  download.file(url = "https://ftp.nmdc.no/nmdc/IMR/Herring/HerringData.csv", 
+                destfile = "inputdata/HerringData.csv")
+}
 
 # --------------------------------------------------
 # ---------------- LOADING DATA --------------------
@@ -24,28 +43,16 @@ N.df <- read.table("inputdata/N.txt",
                    header = TRUE)
 names(N.df) <- str_remove(names(N.df), "X")
 
-# .. F at age and year ..
-F.df <- read.table("inputdata/F.txt",
-                   header = TRUE)
-names(F.df) <- str_remove(names(F.df), "X")
-
-# .. Summary table from XSAM ..
-xsam.df <- read.table("inputdata/SummaryTable.txt",
-                      header = TRUE)
-names(xsam.df) <- tolower(names(xsam.df))
-
 # load temperature data
-load("inputdata/kola.RData")
+if("kola.RData" %in% list.files(path = "inputdata/")) {
+  load("inputdata/kola.RData")
+}
 
 # -- Standardizing data resources --
 N.df$age <- as.integer(rownames(N.df))
-F.df$age <- as.integer(rownames(F.df))
 N.df <- gather(N.df, "year", "N", -age)
-F.df <- gather(F.df, "year", "F", -age)
 N.df$year <- as.integer(N.df$year)
-F.df$year <- as.integer(F.df$year)
 N.df$yearclass <- N.df$year-N.df$age
-F.df$yearclass <- F.df$year-F.df$age
 
 N.df <- N.df %>% group_by(year) %>% mutate(TN = sum(N))
 
@@ -110,6 +117,7 @@ df <- filter(df, !is.na(lat)) # 1 point
 df$julianage <- df$age + (df$month-1)/12
 
 # -- matching mean summer temperature data to observations --
+if("kola.RData" %in% list.files(path = "inputdata/")) {
 summer <- cbind(year = kola$year, temp = rowMeans(kola[, c("Jun","Jul","Aug")]),
                 aug = kola[, "Aug"])
 names(summer) <- c("year","temp", "aug")
@@ -119,5 +127,8 @@ for(i in 1:nrow(df)){
   df$temp[i] <- mean(summer[which(summer[,"year"] %in% s), "temp"])
 }
 df <- filter(df, !is.na(temp))
+}else{
+  df$temp = NA
+}
 save(df, file = "data/official_data.RData")
 save(N.df, file = "data/Ndf.RData")

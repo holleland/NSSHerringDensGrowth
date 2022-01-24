@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+*.docx
+R/8_F_vs_N_figure.R
+R/1_data_all.R

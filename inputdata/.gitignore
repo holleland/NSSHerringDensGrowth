@@ -1,3 +1,5 @@
 *.csv
 *.Rdata
 *.txt
+*.doc
+*.zip
