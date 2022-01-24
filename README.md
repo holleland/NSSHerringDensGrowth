@@ -96,6 +96,14 @@ R.version
     ## version.string R version 4.1.1 (2021-08-10)
     ## nickname       Kick Things
 
+## License
+
+The code for this project is licensed under the [GPL-3.0
+License](LICENCE.md).
+
+[<img src="https://www.hi.no/en/hi/resources/layout/HI-logo-farger-engelsk.svg/original"
+alt="Institute of Marine Research" width="100"/>](https://www.hi.no/en)
+
 ## References
 
 Erling Kåre Stenevik (HI), Sondre Hølleland (HI), Katja Enberg (UiB),
@@ -108,11 +116,3 @@ Erling Kåre Stenevik (HI), Sondre Hølleland (HI), Katja Enberg (UiB),
 Åge Høines (HI), Are Salthaug (HI), Aril Slotte (HI), Sindre Vathehol
 (HI), Sondre Aanes (NR) (2022b) Individual samples of Norwegian Spring
 Spawning herring 1935-2019 <https://doi.org/10.21335/NMDC-496562593>
-
-## License
-
-The code for this project is licensed under the [MIT
-licence](LICENCE.md).
-
-[<img src="https://www.hi.no/en/hi/resources/layout/HI-logo-farger-engelsk.svg/original"
-alt="Institute of Marine Research" width="200"/>](https://www.hi.no/en)
