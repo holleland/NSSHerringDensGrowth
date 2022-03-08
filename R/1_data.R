@@ -118,17 +118,17 @@ df$julianage <- df$age + (df$month-1)/12
 
 # -- matching mean summer temperature data to observations --
 if("kola.RData" %in% list.files(path = "inputdata/")) {
-summer <- cbind(year = kola$year, temp = rowMeans(kola[, c("Jun","Jul","Aug")]),
-                aug = kola[, "Aug"])
-names(summer) <- c("year","temp", "aug")
-df$temp <-df$aug.temp <-  NULL
-for(i in 1:nrow(df)){
-  s <- df$yearclass[i] + 0:min(df$age[i], 3)
-  df$temp[i] <- mean(summer[which(summer[,"year"] %in% s), "temp"])
-}
-df <- filter(df, !is.na(temp))
+  summer <- cbind(year = kola$year, temp = rowMeans(kola[, c("Jun","Jul","Aug")]),
+                  aug = kola[, "Aug"])
+  names(summer) <- c("year","temp", "aug")
+  df$temp <-df$aug.temp <-  NULL
+  for(i in 1:nrow(df)){
+    s <- df$yearclass[i] + 0:min(df$age[i], 3)
+    df$temp[i] <- mean(summer[which(summer[,"year"] %in% s), "temp"])
+  }
+  df <- filter(df, !is.na(temp))
 }else{
-  df$temp = NA
+  df$temp = rnorm(nrow(df), mean = 5, sd = 2)
 }
 save(df, file = "data/official_data.RData")
 save(N.df, file = "data/Ndf.RData")
