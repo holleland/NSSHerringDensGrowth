@@ -48,7 +48,7 @@ of catch advice.
 
 The main data has been put together by Stenevik et al (2022b) and is
 available at <https://doi.org/10.21335/NMDC-496562593>. In our
-*R/1\_data.R* script, the individual herring data is downloaded by
+*R/1_data.R* script, the individual herring data is downloaded by
 running the following code:
 
 ``` r
@@ -60,10 +60,13 @@ if(!("HerringData.csv" %in% list.files(path = "inputdata/") )) {
 
 We are not at liberty to publish the XSAM series here on github, but the
 user can download it from the paper supplementary material (Table S3).
-If you save it as *inputdata/N.txt*, the *R/1\_data.R* script will run
-as intended without adjustments to the code. We do not have permission
-to publish the temperature data, and these are therefore not publicly
-available.
+If you save it as *inputdata/N.txt*, the *R/1_data.R* script will run as
+intended without adjustments to the code. We do not have permission to
+publish the temperature data, and these are therefore not publicly
+available. To have the user be able to run the code for temperature, we
+draw independent random temperatures from a
+*N*(5<sup>∘</sup>*C*,(2<sup>∘</sup>*C*)<sup>2</sup>) distribution if the
+temperature data is not available.
 
 ## Authors’ github accounts
 
@@ -83,14 +86,14 @@ The code has been run on the following R version.
     ## system         x86_64, mingw32             
     ## status                                     
     ## major          4                           
-    ## minor          1.1                         
+    ## minor          1.2                         
     ## year           2021                        
-    ## month          08                          
-    ## day            10                          
-    ## svn rev        80725                       
+    ## month          11                          
+    ## day            01                          
+    ## svn rev        81115                       
     ## language       R                           
-    ## version.string R version 4.1.1 (2021-08-10)
-    ## nickname       Kick Things
+    ## version.string R version 4.1.2 (2021-11-01)
+    ## nickname       Bird Hippie
 
 ## License
 
