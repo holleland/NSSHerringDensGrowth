@@ -4,7 +4,7 @@ herring
 
 
 
-*Contributors: Erling Kåre Stenevik<sup>1\*</sup>, Sondre
+*Contributors: Erling Kåre Stenevik<sup>1,\*</sup>, Sondre
 Hølleland<sup>1,4,†</sup>, Katja Enberg<sup>2</sup>, Åge
 Høines<sup>1</sup>, Are Salthaug<sup>1</sup>, Aril Slotte<sup>1</sup>,
 Sindre Vatnehol<sup>1</sup>, Sondre Aanes<sup>3</sup>*
