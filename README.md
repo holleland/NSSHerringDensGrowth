@@ -5,13 +5,14 @@ herring
 
 
 *Contributors: Erling Kåre Stenevik<sup>1\*</sup>, Sondre
-Hølleland<sup>1†</sup>, Katja Enberg<sup>2</sup>, Åge
+Hølleland<sup>1,4,†</sup>, Katja Enberg<sup>2</sup>, Åge
 Høines<sup>1</sup>, Are Salthaug<sup>1</sup>, Aril Slotte<sup>1</sup>,
 Sindre Vatnehol<sup>1</sup>, Sondre Aanes<sup>3</sup>*
 
 <sup>1</sup> Institute of Marine Research, Norway.<br> <sup>2</sup>
 University of Bergen, Norway.<br> <sup>3</sup> Norwegian Computing
-Center, Norway.<br> <sup>\*</sup> Corresponding author;
+Center, Norway.<br> <sup>4</sup> Norwegian School of Economics, Norway.
+<br> <sup>\*</sup> Corresponding author;
 [erling.stenevik@hi.no](emailto:erling.stenevik@hi.no)<br> <sup>†</sup>
 Responsible for the code. Correspondance related to this to:
 [sondre.hoelleland@hi.no](emailto:sondre.hoelleland@hi.no)
