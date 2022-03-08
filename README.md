@@ -64,8 +64,8 @@ If you save it as *inputdata/N.txt*, the *R/1_data.R* script will run as
 intended without adjustments to the code. We do not have permission to
 publish the temperature data, and these are therefore not publicly
 available. To have the user be able to run the code for temperature, we
-draw independent random temperatures from a
-*N*(5<sup>∘</sup>*C*,(2<sup>∘</sup>*C*)<sup>2</sup>) distribution if the
+draw independent random Gaussian temperatures with expectation
+$5^\\circ {\\rm C}$ and standard deviation $1.5^\\circ {\\rm C}$ if the
 temperature data is not available.
 
 ## Authors’ github accounts

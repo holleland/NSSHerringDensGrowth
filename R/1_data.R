@@ -128,7 +128,8 @@ if("kola.RData" %in% list.files(path = "inputdata/")) {
   }
   df <- filter(df, !is.na(temp))
 }else{
-  df$temp = rnorm(nrow(df), mean = 5, sd = 2)
+  set.seed(123) # for reproducibility
+  df$temp = rnorm(nrow(df), mean = 5, sd = 1.5)
 }
 save(df, file = "data/official_data.RData")
 save(N.df, file = "data/Ndf.RData")
